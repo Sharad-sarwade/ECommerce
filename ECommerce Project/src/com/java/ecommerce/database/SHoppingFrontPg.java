@@ -13,13 +13,14 @@ static void mainPage() {
 	ShoppingMain shoppingmain =new ShoppingMain();
 	Scanner sc = new Scanner(System.in);
 	int ch = sc.nextInt();
+	AdminMenu adminMenu = new AdminMenu();
 	switch(ch) {
 	
 	
 	case 1: shoppingmain.user();
 				break;
-	//case 2: shoppingmain.admin();
-//				break;
+	case 2: adminMenu.admin();
+				break;
 	case 3:System.out.println("Sign out Successfully.."); System.exit(0);System.out.println("Sign out Successfully..");
 }
 }

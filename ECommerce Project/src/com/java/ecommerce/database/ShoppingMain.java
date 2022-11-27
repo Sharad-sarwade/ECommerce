@@ -10,8 +10,7 @@ public class ShoppingMain {
 //			sd.driverConn();
 			
 		 static void user(){
-			for(;;) 
-			{
+			
 			System.out.println("1. Sign Up  2. Log In 3.Back  4. Exit Application");
 			Database database = new Database();
 			Scanner sc = new Scanner(System.in);
@@ -29,6 +28,6 @@ public class ShoppingMain {
 			}}
 			
 			
-			}
+			
 		}
 
