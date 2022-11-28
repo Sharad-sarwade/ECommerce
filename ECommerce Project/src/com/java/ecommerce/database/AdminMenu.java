@@ -10,30 +10,43 @@ import java.util.Scanner;
 import com.mysql.cj.protocol.Resultset;
 
 public class AdminMenu {
-
+	static String adminFixUId="root";
+	static String adminFixPass="Sharad$20";
 	
 		static Scanner newScan = new Scanner(System.in);
+	public static void back() {
+		System.out.println("1. BACk");
+		int choice = newScan.nextInt();
+		switch(choice) {
+		    case 1: adminsNev();break;
+		    default:adminsNev();break;
+		}
+		
+	}
 	public static void admin() {
 			System.out.println("Enter Admin details ");
 			System.out.println("Enetr Admin's User Id And Password ");
 			String adminUserId = newScan.next();
 			String adminPass= newScan.next();
+			
+			if(adminUserId.equals((adminFixUId))&&(adminPass.equals(adminFixPass))){
+			adminsNev();
+			}else {
+				System.out.println("Alert!.. Enter Correct Credentials..");
+			}
+	}
+	public static void adminsNev() {
 		
-		if(adminUserId.equals(("Admin"))&&(adminPass.equals("Admin@123"))){
-		
-			System.out.println("1. check quantity 2.Check user List 3.check the particular user history ");
+			System.out.println("1. check quantity 2.Check user List 3.check user history 4. logout");
 			int choice = newScan.nextInt();
 			switch(choice) {
 			case 1:checkQuantity();break;
 			case 2:CheckUserlist();break;
 			case 3:checkHistory();break;
-//			case 4;
+			case 4:System.out.println("Admin Log out Successfully..\n");SHoppingFrontPg.mainPage();break;
+			case 5:System.exit(0);System.out.println("App successfully Exited..");
 			}}
-			else {
-				System.out.println("Alert!.. Enter Correct Credentials..");
-			
-			}
-	}
+
 
 	public static void checkHistory() {
 		Connection conn;
@@ -53,7 +66,7 @@ public class AdminMenu {
 		}   catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		back();
 	}
 
 	public static void CheckUserlist() {
@@ -71,7 +84,7 @@ public class AdminMenu {
 		}   catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		back();
 	}
 
 	public static void checkQuantity() {
@@ -98,7 +111,8 @@ public class AdminMenu {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+		back();
 	}
+	 	
 		
 	}

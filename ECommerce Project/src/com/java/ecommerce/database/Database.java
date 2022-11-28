@@ -71,7 +71,8 @@ public class Database {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-		    System.out.println("registered successfully..");
+		    System.out.println("registered successfully..\nYou can log in now..");
+		    ShoppingMain.user();
 	 }
 	 public static void logIn() {
 	
@@ -110,7 +111,7 @@ public class Database {
 			 e.printStackTrace();}
 	  }
 	 public static void products() {
-		
+		for(;;)
 		 try {
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -131,7 +132,7 @@ public class Database {
 			
 			
 			
-			System.out.println("no. "+" product name "+" Description "+ " price  "+"Quantity "+" Quantity  ");
+			System.out.println("no.   "+" product name   "+" Description   "+  " price  "+"   Quantity  ");
 				
 			while(rs1.next()) {
 					int Product_id = rs1.getInt(1);
@@ -232,9 +233,9 @@ public class Database {
 		System.out.println("---------------------------------------"+"\n");
 		System.out.println("Product name:"+pdName);
 		System.out.println("Product Discription:"+pdDis);
-		System.out.println("Product Price:"+prc);
+		System.out.println("Product Price:"+prc+" Rupees");
 		System.out.println("Quantity:"+Qty);
-		System.out.println("Total Bill Paid:"+totalPrc);
+		System.out.println("Total Bill Paid:"+totalPrc+" Rupees");
 		System.out.println("---------------------------------------"+"\n");
 		System.out.println("Congrats!  Your Product Purchesed Successfully...");
 		int remainingQty=qty-Qty;
@@ -262,7 +263,7 @@ public class Database {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+		SHoppingFrontPg.nevigation();
 	}
 	
 	 
