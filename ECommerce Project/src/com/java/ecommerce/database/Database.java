@@ -22,17 +22,8 @@ public class Database {
 	Scanner sc1;
 	static productDetail pd;
 	static LinkedList<productDetail> list = new LinkedList<>();
-//	 public Database() {
-//		 this.name=name;
-//		 this.ci=email;
-//		 this.password=password;
-//	}
-//	public Database(String name, String email, String password) {
-//		 this.name=name;
-//		 this.email=email;
-//		 this.password=password;
-//	}
-	public static void registerUser(){
+
+	public static void registerUser() throws SQLException{
 		
 		 
 		 	LinkedList<Database> list = new LinkedList<>();
@@ -49,18 +40,9 @@ public class Database {
 		 	System.out.println("Enter your Password..");
 		 	password = scanner.next();
 		 	
-			try {			 
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				String url ="jdbc:mysql://localhost:3306/shoppingcart";
-//				String user="root";
-//				String password="Sharad$20";
-//				
-//				Connection conn = DriverManager.getConnection(url, user, password);
-				
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/shoppingcart","root","Sharad$20");
-				
+			
 			String newQuery ="insert into shoppingcart.registereduser(regId,firstname,city,mob_no,password) values(?,?,?,?,?)";
-			PreparedStatement ps1= conn.prepareStatement(newQuery);
+			PreparedStatement ps1= MakeConn.connClass().prepareStatement(newQuery);
 			ps1.setInt(1,uId);
 			ps1.setString(2, name);
 			ps1.setString(3, city);
@@ -68,13 +50,11 @@ public class Database {
 			ps1.setString(5, password);
 			ps1.executeUpdate();
 			ps1.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+			
 		    System.out.println("registered successfully..\nYou can log in now..");
 		    ShoppingMain.user();
 	 }
-	 public static void logIn() {
+	 public static void logIn() throws SQLException {
 	
 		   Scanner scanner = new Scanner(System.in);
 		   System.out.println("Enter your User id");
@@ -82,12 +62,9 @@ public class Database {
 		 
 		   System.out.println("Enter your Password");
 		   String password1 = scanner.next();
-			try {			 
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				String url ="jdbc:mysql://localhost:3306/shoppingcart";
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/shoppingcart","root","Sharad$20");
+			
 				String newQuery ="select * from shoppingcart.registereduser where regId ="+uId;
-				PreparedStatement ps1= conn.prepareStatement(newQuery);
+				PreparedStatement ps1= MakeConn.connClass().prepareStatement(newQuery);
 				ResultSet rs1 = ps1.executeQuery();
 			while(rs1.next()) {
 				
@@ -104,30 +81,29 @@ public class Database {
 			 			System.out.println("Enetr Correct Credential..");
 			 		}
 			}
-		 	conn.close();
+		 	
 		 	ps1.close();
 		 	rs1.close();
-		 }catch(Exception e) {
-			 e.printStackTrace();}
+		 
 	  }
-	 public static void products() {
-		for(;;)
-		 try {
-
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url ="jdbc:mysql://localhost:3306/shoppingcart";
-//			String user="root";
-//			String password="Sharad$20";
-//			
-//			Connection conn = DriverManager.getConnection(url, user, password);
-			
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/shoppingcart","root","Sharad$20");
-			
-			
-			PreparedStatement ps = conn.prepareStatement("select * from product where id = 1");
-			ResultSet rs = ps.executeQuery();
-																							//**************
-			PreparedStatement ps1 = conn.prepareStatement("SELECT * FROM shoppingcart.product order by productName");
+	 public static void products() throws SQLException {
+		for(;;) {
+////		 try {
+////
+////			Class.forName("com.mysql.cj.jdbc.Driver");
+////			String url ="jdbc:mysql://localhost:3306/shoppingcart";
+//////			String user="root";
+//////			String password="Sharad$20";
+//////			
+//////			Connection conn = DriverManager.getConnection(url, user, password);
+////			
+////			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/shoppingcart","root","Sharad$20");
+////			
+////			
+//			PreparedStatement ps = MakeConn.connClass().prepareStatement("select * from product where id = 1");
+//			ResultSet rs = ps.executeQuery();
+//																							//**************
+			PreparedStatement ps1 = MakeConn.connClass().prepareStatement("SELECT * FROM shoppingcart.product order by productName");
 			ResultSet rs1 = ps1.executeQuery();
 			
 			
@@ -154,29 +130,28 @@ public class Database {
 			Scanner sc = new Scanner(System.in);
 			int ch= sc.nextInt();
 			switch(ch) {
-			case 1: SelectAnotherProduct(conn);break;
+			case 1: SelectAnotherProduct();break;
 			case 2:viewCart();break;
 			case 3:shppingMainObj.user(); break;
 			case 4:System.out.println("Exit Application Successfully..");System.exit(0);
 			default : System.out.println("Enter valid choice..");
-			}
-			
+			}}
+		//	}
+//		catch(Exception e) {
+//				e.printStackTrace();
+//			}
 			//SelectProduct(ps);
 
-				conn.close();
-				ps.close();
-				rs.close();
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
+				
+				//rs.close();
+		
 	 }
-	 static void  SelectAnotherProduct(Connection conn) throws SQLException {
+	 static void  SelectAnotherProduct() throws SQLException {
 		 		System.out.println("\n"+"Enetr product id");
 		 		Scanner sc1 = new Scanner(System.in);
 				int prdctId=sc1.nextInt();
 				String que = "select * from product where id = "+prdctId;
-				PreparedStatement ps = conn.prepareStatement(que);
+				PreparedStatement ps = MakeConn.connClass().prepareStatement(que);
 				ResultSet rs1 = ps.executeQuery();
 				
 			//System.out.println("Select product m called");
@@ -242,18 +217,14 @@ public class Database {
 //		System.out.println(remainingQty+"\n"+id);
 
 		try {			 
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url ="jdbc:mysql://localhost:3306/shoppingcart";
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/shoppingcart","root","Sharad$20");
-			
 			String newQuery ="update shoppingcart.product set Quantity= "+remainingQty+" where id ="+id;
-			PreparedStatement ps1= conn.prepareStatement(newQuery);
+			PreparedStatement ps1= MakeConn.connClass().prepareStatement(newQuery);
 			ps1.executeUpdate();
 			
 			String ss="insert into shoppingcart.history(id,name,purchasedProduct,purchsQty) values(?,?,?,?)";
 			
 			//String newQuery1 ="insert into shoppingcart.history values id= " +id +" name=" +name +" purchasedProduct="+pdName+" purchsQty="+Qty+" where id ="+uId;
-			PreparedStatement histPs= conn.prepareStatement(ss);
+			PreparedStatement histPs= MakeConn.connClass().prepareStatement(ss);
 			histPs.setInt(1,id);
 			histPs.setString(2, name);
 			histPs.setString(3, pdName);

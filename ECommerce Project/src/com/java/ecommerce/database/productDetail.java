@@ -16,8 +16,7 @@ public class productDetail {
 	}
 	@Override
 	public String toString() {
-		return "productDetail [id=" + id + ", pdName=" + pdName + ", pdDis=" + pdDis + ", prc=" + prc + ", qty=" + qty
-				+ "]";
+		return "productDetail \n id=" + id + ", pdName=" + pdName + ", pdDis=" + pdDis + ", prc=" + prc + ", qty=" + qty;
 	}
 	
 }

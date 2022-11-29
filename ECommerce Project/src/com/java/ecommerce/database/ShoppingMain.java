@@ -6,23 +6,26 @@ import java.util.Scanner;
 
 public class ShoppingMain {
 	static SHoppingFrontPg shpMain;
-			CustomerData sd = new CustomerData();
-//			sd.driverConn();
 			
-		 static void user(){
+		 static void user() throws SQLException{
 			for(;;) {
 			System.out.println("1.Log In  2.Sign Up 3.Back  4. Exit Application");
 			Database database = new Database();
 			Scanner sc = new Scanner(System.in);
 			int ch = sc.nextInt();
-			switch(ch) {
-			case 1: database.logIn();
-					break;
-			case 2: database.registerUser();
-					break;
-			case 3: shpMain.mainPage();
-					break;	
-			case 4: System.out.println("Sign out Successfully..");System.exit(0);	
+			try {
+				switch(ch) {
+				case 1: database.logIn();
+						break;
+				case 2: database.registerUser();
+						break;
+				case 3: shpMain.mainPage();
+						break;	
+				case 4: System.out.println("Sign out Successfully..");System.exit(0);	
+				}
+			} catch (Exception e) {
+				
+				e.printStackTrace();
 			}
 						
 			}}

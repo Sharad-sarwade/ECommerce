@@ -1,15 +1,16 @@
 package com.java.ecommerce.database;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class SHoppingFrontPg {
 	static ShoppingMain shoppingmain;
 	static Database dbNev;
-		public static void main(String[] args) {
+		public static void main(String[] args) throws SQLException {
 			mainPage();
 			
 }
-static void mainPage() {
+static void mainPage() throws SQLException {
 	System.out.println("WEL-COM SHOPPING APP..");
 	System.out.println("1. User 2. Admin 3. Exit Application");
 	//ShoppingMain shoppingmain =new ShoppingMain();
@@ -26,7 +27,7 @@ static void mainPage() {
 	case 3:System.out.println("App Exited Successfully.."); System.exit(0);
 }
 }
-		public static void nevigation() {
+		public static void nevigation() throws SQLException {
 		//	Database dbNev = new Database();
 			System.out.println("1.Back to Product List 2.Log Out 3.Goto Main Page 4.Exit");
 			Scanner scc= new Scanner(System.in);
